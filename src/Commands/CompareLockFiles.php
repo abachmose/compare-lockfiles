@@ -1,5 +1,7 @@
 <?php namespace LockFiles\Commands;
 
+use LockFiles\Exceptions\LockFileNotFound;
+use LockFiles\Exceptions\LockfileTypeNotSpecified;
 use LockFiles\LockFileComparator;
 use LockFiles\Npm;
 use LockFiles\Parsers\JSONParser;
@@ -45,10 +47,14 @@ class CompareLockFiles extends Command
 
             switch(count($exploded)){
                 case 1:
-                    throw new \Exception(sprintf("You need to provide the lockfile type for %s. One of: %s, e.g. (%s:npm)", $exploded[0], join(", ", array_keys($this->nameMap)), $exploded[0]));
+                    throw new LockfileTypeNotSpecified(sprintf("You need to provide the lockfile type for %s. One of: %s, e.g. (%s:npm)", $exploded[0], join(", ", array_keys($this->nameMap)), $exploded[0]));
             }
 
             list($path, $type) = $exploded;
+
+            if(!file_exists($path)) {
+                throw new LockFileNotFound("Failed to compare: Lockfile with path: {$path} wasn't found");
+            }
 
             switch($type){
                 case 'yarn':
