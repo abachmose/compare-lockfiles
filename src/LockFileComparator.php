@@ -44,21 +44,24 @@ class LockFileComparator
         $this->lockFiles = (new LockFilePrioritizer($this->lockFiles))->prioritize($prioritize);
         $this->addHeaders($prioritize);
 
-        foreach ($this->lockFiles[0]->getModules() as $compareModule) {
-            $this->isConflicting($compareModule, $this->lockFiles[0]);
+        foreach ($this->lockFiles[1]->getModules() as $compareModule) {
+            $this->addConflicting($compareModule, $this->lockFiles[0]);
         }
 
         return $this->CLITableDTO;
 
     }
 
-    private function isConflicting(Module $compareModule, LockFileInterface $prioritizedLockFile)
+    private function addConflicting(Module $compareModule, LockFileInterface $prioritizedLockFile)
     {
 
         /** @var LockFileInterface $lockfile */
         foreach ($this->lockFiles as $lockFile) {
 
-            if ($lockFile->getName() === $prioritizedLockFile->getName()) {
+            /**
+             * Add modules for the prioritized lockfile first
+             */
+            if ($lockFile->getName() !== $prioritizedLockFile->getName()) {
                 continue;
             }
 
