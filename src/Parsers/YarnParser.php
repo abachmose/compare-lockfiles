@@ -33,12 +33,6 @@ class YarnParser implements ParserInterface
     {
         $trimmedContent = [];
         foreach (explode("\n", $fileContents) as $lineContents) {
-/*
-            //is dependency?
-            if(trim($fileContents) === 'dependencies:' && $dependencyList){
-                $dependencyList = true;
-                continue;
-            }*/
 
             /**
              * If the line starts with more than two spaces (a dependency)

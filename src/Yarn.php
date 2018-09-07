@@ -38,7 +38,7 @@ class Yarn extends LockFileAbstract implements LockFileInterface
             }
 
             /**
-             * or doesn't contain: @
+             * Doesn't contain: @
              * ..or contains a space in the start (skip a dependency module)
              */
             if (strpos($lineContents, '@') === false || substr($lineContents,0, 1) === ' ') {
