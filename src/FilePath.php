@@ -38,14 +38,6 @@ class FilePath
         return $this->getPathParts()->last();
     }
 
-    /**
-     * @return string
-     */
-    public function getBasePath(): string
-    {
-        return $this->getPathParts()->first();
-    }
-
     public function getName(): string
     {
         return $this->getDirectorySeperated()->last();
