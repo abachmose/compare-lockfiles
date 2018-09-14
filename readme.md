@@ -4,7 +4,7 @@ This tool makes it easy for you to migrate from NPM to Yarn or vice versa. It gi
 
 To compare lockfiles you run the command from you'r project eg.:
 
-`./lockfiles compare package-lock.json:npm yarn.lock:yarn`, where the `:npm` and `:yarn` specifies the parser to parse the lockfile
+`lockfiles compare package-lock.json:npm yarn.lock:yarn`, where the `:npm` and `:yarn` specifies the parser to parse the lockfile
 
 Optional parameters: 
 
